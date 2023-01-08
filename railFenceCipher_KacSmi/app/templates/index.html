@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css import -->
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+  </head>
+  <body>
+    <div class="App">
+      <h1>Witaj w aplikacji szyfrującej</h1>
+      <div class="Content">
+        <div>
+          <form class="Form" method="POST" action="/encrypt">
+            <label for="message">Wiadomość:</label><br />
+            <input type="text" id="message" name="message" /><br />
+            <label for="height">Wysokość siatki:</label><br />
+            <input
+              type="number"
+              id="height"
+              name="height"
+              min="2"
+              max="10"
+            /><br /><br />
+            <input type="submit" value="Szyfruj" />
+          </form>
+        </div>
+        <div>
+          <form class="Form" method="POST" action="/decrypt">
+            <label for="message">Wiadomość:</label><br />
+            <input type="text" id="message" name="message" /><br />
+            <label for="height">Wysokość siatki:</label><br />
+            <input
+              type="number"
+              id="height"
+              name="height"
+              min="2"
+              max="10"
+            /><br /><br />
+            <input type="submit" value="Odszyfruj" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
