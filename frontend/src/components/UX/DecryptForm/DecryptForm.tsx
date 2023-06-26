@@ -1,12 +1,8 @@
 import React, { useState, FormEvent } from "react";
-import requestToApi from "../../axios";
+import requestToApi from "../.././axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import axios from "axios";
-
-interface EncryptResponse {
-  encrypted_message: string;
-}
+import CopyOnClick from "../../Functional/CopyOnClick/CopyOnClick";
 
 const DecryptForm: React.FC = () => {
   const [ciphertext, setCiphertext] = useState("");
@@ -16,19 +12,23 @@ const DecryptForm: React.FC = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const DecryptMessage = async () => {
-      const response = await requestToApi.post<EncryptResponse>("/decrypt", {
-        ciphertext,
-        key,
-      });
-      setDecryptedMessage(response.data.encrypted_message);
+    const decryptMessage = async () => {
+      try {
+        const response = await requestToApi.post("decrypt", {
+          message: ciphertext,
+          height: key,
+        });
+        setDecryptedMessage(response.data.decrypted_message);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    DecryptMessage();
+    decryptMessage();
   };
 
   return (
     <div className="text-center mt-10">
-      <h1 className="font-semibold text-lg mb-5">Decrypt Here!</h1>
+      <h1 className="font-semibold text-lg mb-5">Odszyfruj tutaj!</h1>
       <form
         className="flex flex-col justify-center gap-5"
         onSubmit={handleSubmit}
@@ -59,8 +59,12 @@ const DecryptForm: React.FC = () => {
       </form>
       {decryptedMessage && (
         <div className="mt-5">
-          <h2>Decrypted Message:</h2>
-          <p>{decryptedMessage}</p>
+          <h2 className="font-semibold text-base mt-[50px] mb-5">
+            Odszyfrowana wiadomść:
+          </h2>
+          <Button variant="text">
+            <CopyOnClick messageToCopy={decryptedMessage} />
+          </Button>
         </div>
       )}
     </div>

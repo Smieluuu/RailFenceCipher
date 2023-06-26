@@ -3,7 +3,7 @@ import EncryptForm from "../components/UX/EncryptForm/EncryptForm";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="flex justify-center gap-[200px]">
       <EncryptForm />
       <DecryptForm />
     </div>
